@@ -16,7 +16,7 @@
 // - The input is going to be a Vector of 2-length tuples,
 //   the first element is the string, the second one is the command.
 // - The output element is going to be a vector of strings.
-
+#[derive(PartialEq)]
 enum Command {
     Uppercase,
     Trim,
@@ -27,7 +27,32 @@ mod my_module {
     use super::Command;
 
     // TODO: Complete the function as described above.
-    // pub fn transformer(input: ???) -> ??? { ??? }
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
+        let mut result = Vec::new();
+
+        for (string, command) in input {
+            match command {
+                Command::Uppercase => {
+                    result.push(string.to_uppercase());
+                }
+                Command::Trim => {
+                    result.push(string.as_str().trim().to_string());
+                }
+                Command::Append(n) => {
+                    let mut new_string = string.clone();
+
+                    // Hint
+                    // The `+` operator can concatenate a `String` with a `&str`.
+
+                    for _ in 0..n {
+                        new_string.push_str("bar");
+                    }
+                    result.push(new_string);
+                }
+            }
+        }
+        result
+    }
 }
 
 fn main() {
@@ -38,6 +63,7 @@ fn main() {
 mod tests {
     // TODO: What do we need to import to have `transformer` in scope?
     // use ???;
+    use super::my_module::transformer;
     use super::Command;
 
     #[test]
