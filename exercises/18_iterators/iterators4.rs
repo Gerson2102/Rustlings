@@ -10,6 +10,12 @@ fn factorial(num: u64) -> u64 {
     // - additional variables
     // For an extra challenge, don't use:
     // - recursion
+
+    // This is one way to do it, perfectly fine:
+    // (1..=num).fold(1, |acc, x| acc * x)
+
+    // And this is another way to do it (built-in method suggested by Clippy), which is cleaner in my opinion:
+    (1..=num).product()
 }
 
 fn main() {
